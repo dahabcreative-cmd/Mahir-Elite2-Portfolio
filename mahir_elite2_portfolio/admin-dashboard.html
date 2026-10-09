@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard — Mahir Elite2</title>
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #0b0d10;
+
+            color: #ffffff;
+
+            min-height: 100vh;
+
+        }
+
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           APP
+        ========================= */
+
+        .app {
+
+            display: flex;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+
+            width: 260px;
+
+            background: #111419;
+
+            border-right:
+                1px solid #252932;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            padding: 25px 18px;
+
+            z-index: 100;
+
+        }
+
+
+        /* BRAND */
+
+        .brand {
+
+            padding:
+                10px 12px 25px;
+
+            border-bottom:
+                1px solid #252932;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .brand h1 {
+
+            font-size: 22px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .brand h1 span {
+
+            color: #ff304f;
+
+        }
+
+
+        .brand p {
+
+            margin-top: 6px;
+
+            color: #858b96;
+
+            font-size: 10px;
+
+            letter-spacing: 1.7px;
+
+        }
+
+
+        /* NAVIGATION */
+
+        .nav {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+
+        }
+
+
+        .nav a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 15px;
+
+            color: #979da8;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            transition: 0.25s;
+
+        }
+
+
+        .nav a:hover {
+
+            background: #1a1e25;
+
+            color: #ffffff;
+
+        }
+
+
+        .nav a.active {
+
+            background: #1a1e25;
+
+            color: #ffffff;
+
+            border-left:
+                3px solid #ff304f;
+
+        }
+
+
+        /* LOGOUT */
+
+        .logout-btn {
+
+            position: absolute;
+
+            left: 18px;
+            right: 18px;
+            bottom: 25px;
+
+            width:
+                calc(100% - 36px);
+
+            padding: 12px;
+
+            background: #171a20;
+
+            border:
+                1px solid #30343d;
+
+            color: #ffffff;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .logout-btn:hover {
+
+            background: #ff304f;
+
+            border-color: #ff304f;
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+
+            margin-left: 260px;
+
+            width:
+                calc(100% - 260px);
+
+            padding: 35px;
+
+        }
+
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .topbar h2 {
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .topbar p {
+
+            color: #858b96;
+
+            font-size: 14px;
+
+        }
+
+
+        .admin-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 10px 14px;
+
+            background: #111419;
+
+            border:
+                1px solid #292e37;
+
+            border-radius: 10px;
+
+            color: #b7bcc5;
+
+            font-size: 13px;
+
+        }
+
+
+        .admin-avatar {
+
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff304f,
+                    #b90025
+                );
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .stat-card {
+
+            background: #111419;
+
+            border:
+                1px solid #252932;
+
+            border-radius: 15px;
+
+            padding: 22px;
+
+            transition: 0.25s;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                #373c46;
+
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .stat-title {
+
+            color: #858b96;
+
+            font-size: 12px;
+
+        }
+
+
+        .stat-icon {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #1a1e25;
+
+            border-radius: 10px;
+
+            font-size: 17px;
+
+        }
+
+
+        .stat-card h3 {
+
+            font-size: 29px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .stat-card small {
+
+            color: #656b76;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================
+           CONTENT GRID
+        ========================= */
+
+        .content-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap: 20px;
+
+        }
+
+
+        .panel {
+
+            background: #111419;
+
+            border:
+                1px solid #252932;
+
+            border-radius: 15px;
+
+            padding: 22px;
+
+        }
+
+
+        .panel-header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .panel-header h3 {
+
+            font-size: 17px;
+
+        }
+
+
+        .panel-link {
+
+            color: #ff304f;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+        }
+
+
+        .panel-link:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================
+           RECENT PROJECTS
+        ========================= */
+
+        .project-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+        }
+
+
+        .project-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 12px;
+
+            background: #0c0f13;
+
+            border:
+                1px solid #20242c;
+
+            border-radius: 10px;
+
+        }
+
+
+        .project-image {
+
+            width: 50px;
+            height: 50px;
+
+            border-radius: 9px;
+
+            background: #191d24;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .project-image img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .project-placeholder {
+
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #656b76;
+
+            font-size: 18px;
+
+        }
+
+
+        .project-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .project-info h4 {
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .project-info p {
+
+            color: #707681;
+
+            font-size: 11px;
+
+        }
+
+
+        .project-badge {
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(
+                    255,
+                    48,
+                    79,
+                    0.1
+                );
+
+            color: #ff6077;
+
+            font-size: 9px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .quick-btn {
+
+            min-height: 90px;
+
+            border:
+                1px solid #292e37;
+
+            background: #0c0f13;
+
+            color: #ffffff;
+
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            padding: 15px;
+
+            text-align: left;
+
+            transition: 0.25s;
+
+        }
+
+
+        .quick-btn:hover {
+
+            border-color:
+                #ff304f;
+
+            background: #15181e;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .quick-icon {
+
+            display: block;
+
+            font-size: 21px;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .quick-btn strong {
+
+            display: block;
+
+            font-size: 12px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .quick-btn span {
+
+            color: #707681;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =========================
+           WEBSITE STATUS
+        ========================= */
+
+        .website-status {
+
+            margin-top: 20px;
+
+            padding: 17px;
+
+            border:
+                1px solid #20242c;
+
+            background: #0c0f13;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+        }
+
+
+        .website-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .status-dot {
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #58d68d;
+
+            box-shadow:
+                0 0 10px
+                rgba(
+                    88,
+                    214,
+                    141,
+                    0.5
+                );
+
+        }
+
+
+        .website-info strong {
+
+            display: block;
+
+            font-size: 12px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .website-info span {
+
+            color: #707681;
+
+            font-size: 10px;
+
+        }
+
+
+        .online {
+
+            color: #58d68d;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 35px 15px;
+
+            color: #656b76;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .content-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+
+                width: 220px;
+
+            }
+
+            .main {
+
+                margin-left: 220px;
+
+                width:
+                    calc(100% - 220px);
+
+                padding: 25px;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .app {
+
+                display: block;
+
+            }
+
+            .sidebar {
+
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+                border-right: none;
+
+                border-bottom:
+                    1px solid #252932;
+
+            }
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+
+                padding: 20px;
+
+            }
+
+            .logout-btn {
+
+                position: static;
+
+                width: 100%;
+
+                margin-top: 20px;
+
+            }
+
+            .topbar {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .stats {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .quick-actions {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =================================
+         SIDEBAR
+    ================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="brand">
+
+            <h1>
+                Mahir <span>Elite2</span>
+            </h1>
+
+            <p>
+                PORTFOLIO MANAGEMENT
+            </p>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <a
+                href="admin-dashboard.html"
+                class="active"
+            >
+                📊
+                Dashboard
+            </a>
+
+
+            <a href="portfolio-manager.html">
+
+                🚀
+                Projects
+
+            </a>
+
+
+            <a href="messages.html">
+
+                📩
+                Messages
+
+            </a>
+
+
+            <a
+                href="index.html"
+                target="_blank"
+            >
+
+                🌐
+                Website
+
+            </a>
+
+
+            <a href="admin.html">
+
+                🔐
+                Login
+
+            </a>
+
+        </nav>
+
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+
+            Logout
+
+        </button>
+
+    </aside>
+
+
+
+    <!-- =================================
+         MAIN
+    ================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+
+            <div>
+
+                <h2>
+                    Dashboard
+                </h2>
+
+                <p>
+                    Welcome to your portfolio
+                    management system.
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <div class="admin-avatar">
+                    ME
+                </div>
+
+                <span id="adminName">
+                    Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             STATISTICS
+        ================================== -->
+
+        <section class="stats">
+
+
+            <!-- PROJECTS -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        TOTAL PROJECTS
+                    </span>
+
+                    <span class="stat-icon">
+                        🚀
+                    </span>
+
+                </div>
+
+
+                <h3 id="projectCount">
+                    0
+                </h3>
+
+                <small>
+                    Projects in portfolio
+                </small>
+
+            </div>
+
+
+
+            <!-- FEATURED -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        FEATURED PROJECTS
+                    </span>
+
+                    <span class="stat-icon">
+                        ⭐
+                    </span>
+
+                </div>
+
+
+                <h3 id="featuredCount">
+                    0
+                </h3>
+
+                <small>
+                    Featured projects
+                </small>
+
+            </div>
+
+
+
+            <!-- MESSAGES -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        MESSAGES
+                    </span>
+
+                    <span class="stat-icon">
+                        📩
+                    </span>
+
+                </div>
+
+
+                <h3 id="messageCount">
+                    0
+                </h3>
+
+                <small>
+                    Messages received
+                </small>
+
+            </div>
+
+
+
+            <!-- WEBSITE -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        WEBSITE STATUS
+                    </span>
+
+                    <span class="stat-icon">
+                        🌐
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    ON
+                </h3>
+
+                <small>
+                    Public website active
+                </small>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             CONTENT
+        ================================== -->
+
+        <div class="content-grid">
+
+
+            <!-- RECENT PROJECTS -->
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <h3>
+                        Recent Projects
+                    </h3>
+
+                    <a
+                        href="portfolio-manager.html"
+                        class="panel-link"
+                    >
+                        Manage →
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="recentProjects"
+                    class="project-list"
+                >
+                </div>
+
+            </section>
+
+
+
+            <!-- QUICK ACTIONS -->
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <h3>
+                        Quick Actions
+                    </h3>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <button
+                        class="quick-btn"
+                        onclick="openProjectManager()"
+                    >
+
+                        <span class="quick-icon">
+                            ➕
+                        </span>
+
+                        <strong>
+                            Add Project
+                        </strong>
+
+                        <span>
+                            Create new project
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="quick-btn"
+                        onclick="openProjectManager()"
+                    >
+
+                        <span class="quick-icon">
+                            🛠️
+                        </span>
+
+                        <strong>
+                            Manage Projects
+                        </strong>
+
+                        <span>
+                            Edit or delete projects
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="quick-btn"
+                        onclick="openMessages()"
+                    >
+
+                        <span class="quick-icon">
+                            📩
+                        </span>
+
+                        <strong>
+                            Messages
+                        </strong>
+
+                        <span>
+                            View contact messages
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="quick-btn"
+                        onclick="viewWebsite()"
+                    >
+
+                        <span class="quick-icon">
+                            🌐
+                        </span>
+
+                        <strong>
+                            View Website
+                        </strong>
+
+                        <span>
+                            Open public portfolio
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- WEBSITE STATUS -->
+
+                <div class="website-status">
+
+
+                    <div class="website-info">
+
+                        <span class="status-dot"></span>
+
+
+                        <div>
+
+                            <strong>
+                                Portfolio Website
+                            </strong>
+
+                            <span>
+                                Your public website is active
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="online">
+                        ● ONLINE
+                    </span>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- =================================
+     JAVASCRIPT
+================================== -->
+
+<script>
+
+
+    /* =================================
+       LOGIN PROTECTION
+    ================================= */
+
+    const loggedIn =
+        sessionStorage.getItem(
+            "adminLoggedIn"
+        );
+
+
+    if (loggedIn !== "true") {
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+
+
+    /* =================================
+       ADMIN USER
+    ================================= */
+
+    const adminUsername =
+        sessionStorage.getItem(
+            "adminUsername"
+        );
+
+
+    if (adminUsername) {
+
+        document.getElementById(
+            "adminName"
+        ).textContent =
+            adminUsername;
+
+    }
+
+
+
+    /* =================================
+       LOAD PROJECTS
+    ================================= */
+
+    function getProjects() {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "portfolioProjects"
+            )
+        ) || [];
+
+    }
+
+
+
+    /* =================================
+       LOAD MESSAGES
+    ================================= */
+
+    function getMessages() {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "portfolioMessages"
+            )
+        ) || [];
+
+    }
+
+
+
+    /* =================================
+       UPDATE STATISTICS
+    ================================= */
+
+    function updateStatistics() {
+
+
+        const projects =
+            getProjects();
+
+
+        const messages =
+            getMessages();
+
+
+        const featured =
+            projects.filter(
+                project =>
+                    project.featured === true
+            );
+
+
+        document.getElementById(
+            "projectCount"
+        ).textContent =
+            projects.length;
+
+
+        document.getElementById(
+            "featuredCount"
+        ).textContent =
+            featured.length;
+
+
+        document.getElementById(
+            "messageCount"
+        ).textContent =
+            messages.length;
+
+    }
+
+
+
+    /* =================================
+       ESCAPE HTML
+    ================================= */
+
+    function escapeHTML(value) {
+
+        if (!value) return "";
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+
+    /* =================================
+       RECENT PROJECTS
+    ================================= */
+
+    function loadRecentProjects() {
+
+
+        const projects =
+            getProjects();
+
+
+        const container =
+            document.getElementById(
+                "recentProjects"
+            );
+
+
+        if (
+            projects.length === 0
+        ) {
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    🚀
+
+                    <br><br>
+
+                    No projects yet.
+
+                    <br>
+
+                    Add your first project
+                    from Project Manager.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        /* NEWEST FIRST */
+
+        const recent =
+            [...projects]
+                .sort(
+                    (a, b) =>
+                        Number(b.id || 0) -
+                        Number(a.id || 0)
+                )
+                .slice(0, 5);
+
+
+
+        container.innerHTML =
+            recent.map(
+                project => {
+
+
+                    const image =
+                        project.image;
+
+
+                    return `
+
+                        <div
+                            class="project-item"
+                        >
+
+
+                            <div
+                                class="project-image"
+                            >
+
+                                ${
+                                    image
+
+                                    ?
+
+                                    `
+                                    <img
+                                        src="${image}"
+                                        alt="${escapeHTML(
+                                            project.name ||
+                                            "Project"
+                                        )}"
+                                    >
+                                    `
+
+                                    :
+
+                                    `
+                                    <div
+                                        class="project-placeholder"
+                                    >
+                                        🚀
+                                    </div>
+                                    `
+                                }
+
+                            </div>
+
+
+
+                            <div
+                                class="project-info"
+                            >
+
+                                <h4>
+
+                                    ${escapeHTML(
+                                        project.name ||
+                                        "Untitled Project"
+                                    )}
+
+                                </h4>
+
+
+                                <p>
+
+                                    ${escapeHTML(
+                                        project.category ||
+                                        "Project"
+                                    )}
+
+                                </p>
+
+                            </div>
+
+
+
+                            ${
+                                project.featured
+
+                                ?
+
+                                `
+                                <span
+                                    class="project-badge"
+                                >
+                                    FEATURED
+                                </span>
+                                `
+
+                                :
+
+                                ""
+                            }
+
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+
+    /* =================================
+       OPEN PROJECT MANAGER
+    ================================= */
+
+    function openProjectManager() {
+
+        window.location.href =
+            "portfolio-manager.html";
+
+    }
+
+
+
+    /* =================================
+       OPEN MESSAGES
+    ================================= */
+
+    function openMessages() {
+
+        window.location.href =
+            "messages.html";
+
+    }
+
+
+
+    /* =================================
+       VIEW WEBSITE
+    ================================= */
+
+    function viewWebsite() {
+
+        window.open(
+            "index.html",
+            "_blank"
+        );
+
+    }
+
+
+
+    /* =================================
+       LOGOUT
+    ================================= */
+
+    function logout() {
+
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to logout?"
+            );
+
+
+        if (!confirmed) return;
+
+
+        sessionStorage.removeItem(
+            "adminLoggedIn"
+        );
+
+
+        sessionStorage.removeItem(
+            "adminUsername"
+        );
+
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+
+
+    /* =================================
+       INITIALIZE
+    ================================= */
+
+    updateStatistics();
+
+    loadRecentProjects();
+
+
+</script>
+
+
+
+</body> 
+</html>

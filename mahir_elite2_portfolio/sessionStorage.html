@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Session Storage | Mahir Elite2</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #080808;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: #111111;
+            border: 1px solid #292929;
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #ff2d2d;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #999999;
+            margin-bottom: 25px;
+        }
+
+        .status-box {
+            background: #181818;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            background: #242424;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .status:last-child {
+            margin-bottom: 0;
+        }
+
+        .buttons {
+            display: grid;
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #ff2d2d;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .dark {
+            background: #333333;
+        }
+
+        .logout {
+            background: #990000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>SessionStorage</h1>
+
+        <p class="subtitle">
+            Mahir Elite2 Admin System
+        </p>
+
+        <div class="status-box">
+
+            <div class="status">
+                <strong>Login Status:</strong>
+                <span id="loginStatus">Not Logged In</span>
+            </div>
+
+            <div class="status">
+                <strong>Username:</strong>
+                <span id="username">None</span>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <button id="loginButton">
+                Login
+            </button>
+
+            <button id="checkButton" class="dark">
+                Check Session
+            </button>
+
+            <button id="logoutButton" class="logout">
+                Logout
+            </button>
+
+            <button id="dashboardButton" class="dark">
+                Open Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // ================================
+        // ELEMENTS
+        // ================================
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const checkButton =
+            document.getElementById("checkButton");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const dashboardButton =
+            document.getElementById("dashboardButton");
+
+        const loginStatus =
+            document.getElementById("loginStatus");
+
+        const username =
+            document.getElementById("username");
+
+
+        // ================================
+        // CHECK SESSION
+        // ================================
+
+        function checkSession() {
+
+            const loggedIn =
+                sessionStorage.getItem("adminLoggedIn");
+
+            const adminUsername =
+                sessionStorage.getItem("adminUsername");
+
+
+            if (loggedIn === "true") {
+
+                loginStatus.textContent =
+                    "✅ Logged In";
+
+                username.textContent =
+                    adminUsername || "admin";
+
+            } else {
+
+                loginStatus.textContent =
+                    "❌ Not Logged In";
+
+                username.textContent =
+                    "None";
+            }
+        }
+
+
+        // ================================
+        // LOGIN
+        // ================================
+
+        loginButton.onclick = function () {
+
+            sessionStorage.setItem(
+                "adminLoggedIn",
+                "true"
+            );
+
+            sessionStorage.setItem(
+                "adminUsername",
+                "admin"
+            );
+
+            checkSession();
+
+        };
+
+
+        // ================================
+        // CHECK BUTTON
+        // ================================
+
+        checkButton.onclick = function () {
+
+            checkSession();
+
+        };
+
+
+        // ================================
+        // LOGOUT
+        // ================================
+
+        logoutButton.onclick = function () {
+
+            sessionStorage.removeItem(
+                "adminLoggedIn"
+            );
+
+            sessionStorage.removeItem(
+                "adminUsername"
+            );
+
+            checkSession();
+
+        };
+
+
+        // ================================
+        // DASHBOARD
+        // ================================
+
+        dashboardButton.onclick = function () {
+
+            const loggedIn =
+                sessionStorage.getItem("adminLoggedIn");
+
+
+            if (loggedIn === "true") {
+
+                window.location.href =
+                    "admin-dashboard.html";
+
+            } else {
+
+                alert("Please login first.");
+
+            }
+        };
+
+
+        // ================================
+        // START
+        // ================================
+
+        checkSession();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login — Mahir Elite2</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #1d2028 0%,
+                    #0b0d10 45%,
+                    #060709 100%
+                );
+
+            color: #ffffff;
+
+            padding: 20px;
+        }
+
+
+        /* =========================
+           LOGIN CONTAINER
+        ========================= */
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
+
+        .brand {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .brand-logo {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff304f,
+                    #b90025
+                );
+
+            font-size: 24px;
+            font-weight: 900;
+
+            box-shadow:
+                0 15px 40px
+                rgba(255, 48, 79, 0.25);
+        }
+
+        .brand h1 {
+            font-size: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand h1 span {
+            color: #ff304f;
+        }
+
+        .brand p {
+            margin-top: 7px;
+
+            color: #858b96;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-card {
+            background:
+                rgba(17, 20, 25, 0.96);
+
+            border:
+                1px solid #282d36;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0, 0, 0, 0.45);
+
+            backdrop-filter: blur(15px);
+
+            animation:
+                cardIn 0.5s ease;
+        }
+
+
+        @keyframes cardIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .login-header {
+            margin-bottom: 28px;
+        }
+
+        .login-header h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: #858b96;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #d5d8de;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 16px;
+
+            opacity: 0.65;
+
+            pointer-events: none;
+        }
+
+
+        .form-input {
+            width: 100%;
+
+            padding:
+                14px
+                14px
+                14px
+                45px;
+
+            background: #0b0d10;
+
+            border:
+                1px solid #2a2f38;
+
+            border-radius: 10px;
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+
+        .form-input::placeholder {
+            color: #606672;
+        }
+
+
+        .form-input:focus {
+            border-color: #ff304f;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(255, 48, 79, 0.08);
+        }
+
+
+        /* =========================
+           PASSWORD BUTTON
+        ========================= */
+
+        .password-toggle {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #858b96;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            padding: 5px;
+        }
+
+        .password-toggle:hover {
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .options {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #858b96;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+            accent-color: #ff304f;
+
+            cursor: pointer;
+        }
+
+
+        .security {
+            color: #686e79;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff304f,
+                    #d90b32
+                );
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                opacity 0.2s;
+        }
+
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(255, 48, 79, 0.25);
+        }
+
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+
+        .login-btn.loading {
+            opacity: 0.7;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-message {
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px 14px;
+
+            background:
+                rgba(255, 48, 79, 0.08);
+
+            border:
+                1px solid
+                rgba(255, 48, 79, 0.25);
+
+            border-radius: 9px;
+
+            color: #ff6b80;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        .error-message.show {
+            display: block;
+
+            animation:
+                shake 0.3s ease;
+        }
+
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+
+        }
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        .success-message {
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px 14px;
+
+            background:
+                rgba(88, 214, 141, 0.08);
+
+            border:
+                1px solid
+                rgba(88, 214, 141, 0.25);
+
+            border-radius: 9px;
+
+            color: #58d68d;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           BACK WEBSITE
+        ========================= */
+
+        .back-website {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #858b96;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+
+        .back-website:hover {
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #555b66;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .brand h1 {
+                font-size: 22px;
+            }
+
+            .brand-logo {
+                width: 58px;
+                height: 58px;
+            }
+
+            .options {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         LOGIN CONTAINER
+    ========================== -->
+
+    <div class="login-container">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                ME
+            </div>
+
+            <h1>
+                Mahir <span>Elite2</span>
+            </h1>
+
+            <p>
+                ADMIN PANEL
+            </p>
+
+        </div>
+
+
+
+        <!-- LOGIN CARD -->
+
+        <div class="login-card">
+
+
+            <!-- HEADER -->
+
+            <div class="login-header">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Sign in to access your portfolio
+                    management dashboard.
+                </p>
+
+            </div>
+
+
+
+            <!-- ERROR -->
+
+            <div
+                id="errorMessage"
+                class="error-message"
+            >
+                Username or password is incorrect.
+            </div>
+
+
+
+            <!-- SUCCESS -->
+
+            <div
+                id="successMessage"
+                class="success-message"
+            >
+                Login successful. Redirecting...
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form
+                id="loginForm"
+                autocomplete="off"
+            >
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            id="username"
+                            class="form-input"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-input"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <span class="security">
+                        🔐 Secure Login
+                    </span>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginButton"
+                >
+                    Login to Dashboard
+                </button>
+
+            </form>
+
+
+
+            <!-- BACK -->
+
+            <a
+                href="index.html"
+                class="back-website"
+            >
+                ← Back to Website
+            </a>
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            © 2026 Mahir Elite2.
+            Portfolio Management System.
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        /* =====================================
+           ADMIN CREDENTIALS
+        ===================================== */
+
+        const correctUsername = "MAHIR_ELITE2";
+
+        const correctPassword =
+            "MOHO4412";
+
+
+
+        /* =====================================
+           ELEMENTS
+        ===================================== */
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const usernameInput =
+            document.getElementById(
+                "username"
+            );
+
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+
+        const errorMessage =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        const successMessage =
+            document.getElementById(
+                "successMessage"
+            );
+
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
+
+
+        /* =====================================
+           PASSWORD SHOW / HIDE
+        ===================================== */
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                const isPassword =
+                    passwordInput.type ===
+                    "password";
+
+
+                if (isPassword) {
+
+                    passwordInput.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "🙈";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================
+           CLEAR ERROR
+        ===================================== */
+
+        function clearMessages() {
+
+            errorMessage.classList.remove(
+                "show"
+            );
+
+            successMessage.style.display =
+                "none";
+
+        }
+
+
+
+        /* =====================================
+           LOGIN
+        ===================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                clearMessages();
+
+
+                const username =
+                    usernameInput.value.trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                /* CHECK CREDENTIALS */
+
+                if (
+                    username ===
+                    correctUsername &&
+
+                    password ===
+                    correctPassword
+                ) {
+
+
+                    /* =========================
+                       SAVE LOGIN SESSION
+                    ========================== */
+
+                    sessionStorage.setItem(
+                        "adminLoggedIn",
+                        "true"
+                    );
+
+
+                    /* SAVE ADMIN USER */
+
+                    sessionStorage.setItem(
+                        "adminUsername",
+                        username
+                    );
+
+
+                    /* SUCCESS MESSAGE */
+
+                    successMessage.style.display =
+                        "block";
+
+
+                    /* BUTTON */
+
+                    loginButton.textContent =
+                        "Login Successful ✓";
+
+                    loginButton.classList.add(
+                        "loading"
+                    );
+
+
+                    /* REDIRECT */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "admin-dashboard.html";
+
+                        },
+                        700
+                    );
+
+
+                } else {
+
+
+                    /* =========================
+                       WRONG LOGIN
+                    ========================== */
+
+                    errorMessage.textContent =
+                        "Username or password is incorrect.";
+
+
+                    errorMessage.classList.add(
+                        "show"
+                    );
+
+
+                    passwordInput.value = "";
+
+                    passwordInput.focus();
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================
+           ENTER KEY SUPPORT
+        ===================================== */
+
+        usernameInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    passwordInput.focus();
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================
+           CHECK EXISTING SESSION
+        ===================================== */
+
+        const existingLogin =
+            sessionStorage.getItem(
+                "adminLoggedIn"
+            );
+
+
+        if (
+            existingLogin === "true"
+        ) {
+
+            /*
+             * User is already logged in.
+             * You can uncomment the next line
+             * if you want automatic redirect.
+             */
+
+            // window.location.href =
+            //     "admin-dashboard.html";
+
+        }
+
+    </script>
+
+</body>
+</html>

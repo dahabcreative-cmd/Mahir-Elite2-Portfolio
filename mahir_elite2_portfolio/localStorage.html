@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LocalStorage Projects | Mahir Elite2</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080808;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #ff2d2d;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #999;
+        }
+
+        .card {
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #ccc;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #1b1b1b;
+            color: white;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #ff2d2d;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .featured {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .featured input {
+            width: auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        .save-btn {
+            background: #ff2d2d;
+        }
+
+        .clear-btn {
+            background: #333;
+        }
+
+        .delete-btn {
+            background: #990000;
+        }
+
+        .edit-btn {
+            background: #444;
+        }
+
+        button:hover {
+            opacity: .85;
+        }
+
+        .search {
+            margin-bottom: 20px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            background: #181818;
+            border: 1px solid #292929;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .project-image {
+            height: 170px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 18px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .project-content p {
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #292929;
+            color: #ff5555;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: #ff2d2d;
+            color: white;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat h3 {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat strong {
+            font-size: 28px;
+            color: #ff2d2d;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>LocalStorage Projects</h1>
+
+        <p class="subtitle">
+            Mahir Elite2 Project Storage System
+        </p>
+
+    </header>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <h3>Total Projects</h3>
+
+            <strong id="totalProjects">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>Featured Projects</h3>
+
+            <strong id="featuredProjects">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADD PROJECT -->
+
+    <div class="card">
+
+        <h2>
+            Add Project
+        </h2>
+
+
+        <form id="projectForm">
+
+
+            <div class="form-group">
+
+                <label>
+                    Project Name
+                </label>
+
+                <input
+                    type="text"
+                    id="projectName"
+                    placeholder="Example: Portfolio Website"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="projectDescription"
+                    placeholder="Write project description..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select id="projectCategory">
+
+                    <option value="web">
+                        Web
+                    </option>
+
+                    <option value="design">
+                        Design
+                    </option>
+
+                    <option value="trading">
+                        Trading
+                    </option>
+
+                    <option value="video">
+                        Video
+                    </option>
+
+                    <option value="data">
+                        Data
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Project Link
+                </label>
+
+                <input
+                    type="url"
+                    id="projectLink"
+                    placeholder="https://example.com"
+                >
+
+            </div>
+
+
+            <div class="featured">
+
+                <input
+                    type="checkbox"
+                    id="projectFeatured"
+                >
+
+                <label for="projectFeatured">
+                    Featured Project
+                </label>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                    id="saveButton"
+                >
+                    Add Project
+                </button>
+
+                <button
+                    type="button"
+                    class="clear-btn"
+                    id="clearButton"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="card">
+
+        <h2>
+            Search Projects
+        </h2>
+
+        <input
+            type="text"
+            id="searchInput"
+            class="search"
+            placeholder="Search project..."
+        >
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <div class="card">
+
+        <h2>
+            Projects
+        </h2>
+
+        <div
+            id="projectsContainer"
+            class="projects-grid"
+        ></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    // ========================================
+    // LOCAL STORAGE KEY
+    // ========================================
+
+    const STORAGE_KEY =
+        "portfolioProjects";
+
+
+    // ========================================
+    // VARIABLES
+    // ========================================
+
+    let projects = [];
+
+    let editingId = null;
+
+
+    // ========================================
+    // GET PROJECTS
+    // ========================================
+
+    function getProjects() {
+
+        const savedProjects =
+            localStorage.getItem(STORAGE_KEY);
+
+        if (savedProjects) {
+
+            projects =
+                JSON.parse(savedProjects);
+
+        } else {
+
+            projects = [];
+
+        }
+    }
+
+
+    // ========================================
+    // SAVE PROJECTS
+    // ========================================
+
+    function saveProjects() {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(projects)
+        );
+
+    }
+
+
+    // ========================================
+    // DISPLAY PROJECTS
+    // ========================================
+
+    function displayProjects() {
+
+        const container =
+            document.getElementById(
+                "projectsContainer"
+            );
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            ).value
+            .toLowerCase()
+            .trim();
+
+
+        const filteredProjects =
+            projects.filter(function(project) {
+
+                return (
+                    project.name
+                        .toLowerCase()
+                        .includes(search)
+                    ||
+                    project.description
+                        .toLowerCase()
+                        .includes(search)
+                    ||
+                    project.category
+                        .toLowerCase()
+                        .includes(search)
+                );
+
+            });
+
+
+        if (filteredProjects.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty">
+                    No projects found.
+                </div>
+            `;
+
+            updateStats();
+
+            return;
+        }
+
+
+        container.innerHTML =
+            filteredProjects.map(function(project) {
+
+                return `
+
+                    <div class="project">
+
+                        <div class="project-image">
+
+                            No Image
+
+                        </div>
+
+                        <div class="project-content">
+
+                            ${
+                                project.featured
+                                ?
+                                `
+                                <span class="featured-badge">
+                                    ⭐ FEATURED
+                                </span>
+                                `
+                                :
+                                ""
+                            }
+
+                            <br>
+
+                            <span class="category">
+                                ${project.category}
+                            </span>
+
+                            <h3>
+                                ${project.name}
+                            </h3>
+
+                            <p>
+                                ${project.description}
+                            </p>
+
+
+                            <div class="project-actions">
+
+                                <button
+                                    class="edit-btn"
+                                    onclick="editProject('${project.id}')"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="delete-btn"
+                                    onclick="deleteProject('${project.id}')"
+                                >
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+
+        updateStats();
+
+    }
+
+
+    // ========================================
+    // ADD / UPDATE PROJECT
+    // ========================================
+
+    document
+        .getElementById("projectForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById("projectName")
+                    .value
+                    .trim();
+
+
+            const description =
+                document
+                    .getElementById("projectDescription")
+                    .value
+                    .trim();
+
+
+            const category =
+                document
+                    .getElementById("projectCategory")
+                    .value;
+
+
+            const link =
+                document
+                    .getElementById("projectLink")
+                    .value
+                    .trim();
+
+
+            const featured =
+                document
+                    .getElementById("projectFeatured")
+                    .checked;
+
+
+            if (!name || !description) {
+
+                alert(
+                    "Please enter project name and description."
+                );
+
+                return;
+            }
+
+
+            if (editingId) {
+
+                const project =
+                    projects.find(function(item) {
+
+                        return item.id === editingId;
+
+                    });
+
+
+                if (project) {
+
+                    project.name =
+                        name;
+
+                    project.description =
+                        description;
+
+                    project.category =
+                        category;
+
+                    project.link =
+                        link;
+
+                    project.featured =
+                        featured;
+
+                }
+
+
+                editingId = null;
+
+                document.getElementById(
+                    "saveButton"
+                ).textContent =
+                    "Add Project";
+
+
+            } else {
+
+                const newProject = {
+
+                    id:
+                        Date.now().toString(),
+
+                    name:
+                        name,
+
+                    description:
+                        description,
+
+                    category:
+                        category,
+
+                    link:
+                        link,
+
+                    featured:
+                        featured,
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+                projects.push(newProject);
+
+            }
+
+
+            saveProjects();
+
+            displayProjects();
+
+            this.reset();
+
+        });
+
+
+    // ========================================
+    // EDIT PROJECT
+    // ========================================
+
+    function editProject(id) {
+
+        const project =
+            projects.find(function(item) {
+
+                return item.id === id;
+
+            });
+
+
+        if (!project) {
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "projectName"
+        ).value =
+            project.name;
+
+
+        document.getElementById(
+            "projectDescription"
+        ).value =
+            project.description;
+
+
+        document.getElementById(
+            "projectCategory"
+        ).value =
+            project.category;
+
+
+        document.getElementById(
+            "projectLink"
+        ).value =
+            project.link;
+
+
+        document.getElementById(
+            "projectFeatured"
+        ).checked =
+            project.featured;
+
+
+        editingId = id;
+
+
+        document.getElementById(
+            "saveButton"
+        ).textContent =
+            "Update Project";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // ========================================
+    // DELETE PROJECT
+    // ========================================
+
+    function deleteProject(id) {
+
+        const confirmDelete =
+            confirm(
+                "Are you sure you want to delete this project?"
+            );
+
+
+        if (!confirmDelete) {
+
+            return;
+
+        }
+
+
+        projects =
+            projects.filter(function(project) {
+
+                return project.id !== id;
+
+            });
+
+
+        saveProjects();
+
+        displayProjects();
+
+    }
+
+
+    // ========================================
+    // CLEAR FORM
+    // ========================================
+
+    document
+        .getElementById("clearButton")
+        .addEventListener("click", function() {
+
+            document
+                .getElementById("projectForm")
+                .reset();
+
+
+            editingId = null;
+
+
+            document.getElementById(
+                "saveButton"
+            ).textContent =
+                "Add Project";
+
+        });
+
+
+    // ========================================
+    // SEARCH
+    // ========================================
+
+    document
+        .getElementById("searchInput")
+        .addEventListener("input", function() {
+
+            displayProjects();
+
+        });
+
+
+    // ========================================
+    // STATS
+    // ========================================
+
+    function updateStats() {
+
+        document.getElementById(
+            "totalProjects"
+        ).textContent =
+            projects.length;
+
+
+        document.getElementById(
+            "featuredProjects"
+        ).textContent =
+            projects.filter(function(project) {
+
+                return project.featured === true;
+
+            }).length;
+
+    }
+
+
+    // ========================================
+    // START
+    // ========================================
+
+    getProjects();
+
+    displayProjects();
+
+</script>
+
+</body>
+</html>

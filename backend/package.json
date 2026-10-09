@@ -1,0 +1,20 @@
+{
+  "name": "mahir-elite2-backend",
+  "version": "1.0.0",
+  "description": "Mahir Elite2 Portfolio Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "backend",
+    "mahir-elite2"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
